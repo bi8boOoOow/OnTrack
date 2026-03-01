@@ -53,6 +53,7 @@ void add_new_song (music_player_data &music_player) {
 
     // displaying a msg that the song has been successfully added
     write_line("new song added successfully!");
+    write_line();
 }
 
 /**
@@ -77,7 +78,7 @@ int select_song(music_player_data &music_player) {
     // show the numbered list of all the songs that contain that text to choose from 
     write_line("Possible songs: ");
     for (int i = 0; i < possible_songs_ids.length(); i++) {
-        write_line(std::to_string(i) + ": " + music_player.songs[possible_songs_ids[i]].name);
+        write_line(std::to_string(i + 1) + ": " + music_player.songs[possible_songs_ids[i]].name);
     }
 
     int target_song_id = read_integer("Input the number of the song you want to modify: ");
@@ -136,6 +137,11 @@ void update_song(music_player_data &music_player) {
                 write_line("Invalid choise. Pick option in the list");
         }
     }
+
+
+    // displaying a msg that the song has been successfully updated
+    write_line("new song updated successfully!");
+    write_line();
 }
 
 /**
@@ -150,7 +156,9 @@ void play_song(music_player_data &music_player) {
     music_player.songs[target_song_id].times += 1;
 
     // play the music
+    write_line("Music successfully playing...");
     play_music(music_player.songs[target_song_id].id);
+    write_line();
 }
 
 /**
@@ -160,9 +168,12 @@ void play_song(music_player_data &music_player) {
 void pause_resume_song() {
     if (music_playing()) { // if the music is currently playing then pause
         pause_music();
+        write_line("music paused");
     } else { // other wise resume
         resume_music();
+        write_line("music resumed");
     }
+    write_line();
 }
 
 
